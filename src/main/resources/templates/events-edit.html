@@ -1,0 +1,65 @@
+
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts}">
+<head>
+<title>Edit your event</title>
+</head>
+<body class="d-flex flex-column h-100">
+	<main class="flex-shrink-0">
+		<section layout:fragment="body" class="py-5">
+			<div class="container">
+				<form th:action="@{/events/{eventId}/edit(eventId=${event.id})}" th:object="${event}" method="POST">
+					<div class="form-row">
+						<input type="hidden" th:field="*{id}">
+						<div class="form-group col-md-6">
+							<label for="name">Event Name</label>
+							<input type="text"
+								th:field="*{name}"
+								class="form-control" placeholder="Event Name">
+								<p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"/>
+						</div>
+						
+						<div class="form-group col-md-6">
+							<label for="type">Running Type</label>
+							<input
+								type="text"
+								class="form-control" th:field="*{type}"
+								placeholder="content">
+								<p th:if="${#fields.hasErrors('type')}" class="text-danger" th:errors="*{type}"/>
+						</div>
+						
+					</div>
+					
+					<div class="form-group">
+						<label for="photoUrl">Photo Url</label>
+						<input type="text"
+							class="form-control" th:field="*{photoUrl}"
+							placeholder="Url">
+							<p th:if="${#fields.hasErrors('photoUrl')}" class="text-danger" th:errors="*{photoUrl}"/>
+					</div>
+					
+					<div class="form-group">
+						<label for="startTime">Start Time</label>
+						<input type="datetime-local"
+							class="form-control" th:field="*{startTime}"
+							placeholder="Url">
+							<p th:if="${#fields.hasErrors('startTime')}" class="text-danger" th:errors="*{startTime}"/>
+					</div>	
+					
+					<div class="form-group">
+						<label for="endTime">End Time</label>
+						<input type="datetime-local"
+							class="form-control" th:field="*{endTime}"
+							placeholder="Url">
+							<p th:if="${#fields.hasErrors('endTime')}" class="text-danger" th:errors="*{endTime}"/>
+					</div>		
+													
+					<button type="submit" class="btn btn-primary">Update Event</button>
+				</form>
+			</div>
+
+		</section>
+	</main>
+</body>
+</html>

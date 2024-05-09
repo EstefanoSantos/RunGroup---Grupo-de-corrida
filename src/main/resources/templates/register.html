@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts}">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+<style>
+.main {
+	padding: 0px 10px;
+}
+
+@media screen and (max-width: 450px) {
+	.register-form {
+		margin-top: 10%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.main {
+		margin-left: 30%;
+	}
+	.sidenav {
+		width: 40%;
+		position: fixed;
+		z-index: 1;
+		top: 0;
+		left: 0;
+	}
+}
+</style>
+</head>
+
+<section layout:fragment="body">
+
+	<div class="main">
+		<div class="register-form">
+			<form th:action="@{/register/save}" th:object="${user}" method="POST">
+				<div class="form-group">
+					<label for="username">UserName</label> <input type="text"
+						class="form-control" th:field="*{username}"
+						placeholder="Enter username">
+				</div>
+				<p th:if="${#fields.hasErrors('username')}" class="text-danger"
+					th:errors="*{username}"/>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email address</label> <input
+						type="email" class="form-control" th:field="*{email}"
+						placeholder="Enter email">
+				</div>
+				<p th:if="${#fields.hasErrors('email')}" class="text-danger"
+					th:errors="*{email}"/>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label> <input
+						type="password" class="form-control" placeholder="Password"
+						th:field="*{password}">
+				</div>
+				<p th:if="${#fields.hasErrors('password')}" class="text-danger"
+					th:errors="*{password}"/>
+					
+				<p>Have already an account?</p>
+				<a th:href="@{/login}" class="btn btn-primary">Clike here to login</a>
+					<button type="submit" class="btn btn-primary">Register</button>					
+			</form>
+		</div>
+	</div>
+
+</section>
+</html>
